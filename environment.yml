@@ -23,7 +23,7 @@ dependencies:
   - icu=73.2=hc8870d7_0
   - importlib-metadata=8.6.1=pyha770c72_0
   - importlib_resources=6.5.2=pyhd8ed1ab_0
-  - ipykernel=6.29.5=pyh57ce528_0
+  - ipykernel=6.29.5=py312hca03da5_1
   - ipython=8.31.0=pyh707e725_0
   - jedi=0.19.2=pyhd8ed1ab_1
   - jsonschema=4.23.0=pyhd8ed1ab_1
@@ -110,4 +110,24 @@ dependencies:
   - zipp=3.21.0=pyhd8ed1ab_1
   - zlib=1.2.13=hfb2fe0b_6
   - zstd=1.5.6=hfb09047_0
+  - pip:
+      - build==1.2.2.post1
+      - click==8.1.8
+      - filelock==3.17.0
+      - fsspec==2024.12.0
+      - jinja2==3.1.5
+      - joblib==1.4.2
+      - markupsafe==3.0.2
+      - mpmath==1.3.0
+      - networkx==3.4.2
+      - pillow==11.1.0
+      - pip-tools==7.4.1
+      - pyproject-hooks==1.2.0
+      - scikit-learn==1.6.1
+      - scipy==1.15.1
+      - sympy==1.13.1
+      - threadpoolctl==3.5.0
+      - torch==2.6.0
+      - torchaudio==2.6.0
+      - torchvision==0.21.0
 prefix: /opt/anaconda3/envs/DS-101-Final
