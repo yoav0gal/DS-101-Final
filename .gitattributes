@@ -1,0 +1,2 @@
+*.ipynb filter=nb-clean
+**/*.ipynb filter=nb-clean

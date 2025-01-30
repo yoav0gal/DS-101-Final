@@ -1,0 +1,5 @@
+pandas
+nbformat
+ipykernel
+nb-clean
+beautifulsoup4
