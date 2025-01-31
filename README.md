@@ -1,60 +1,43 @@
 # DS-101-Final
+
 The final project in DS course
 
-
-A tool aimed to provide influencers with comments insights to better engage with their followers
-
-### Setting up a BERTopic Environment and Git for Clean Notebooks
+### Setting up an Environment and Git for Clean Notebooks
 
 Steps to create a conda environment for BERTopic and configure Git to automatically clean Jupyter Notebooks (`.ipynb`) before committing.
 
 #### 1. Create and Activate Conda Environment
 
 ```bash
-conda create -f environment.yml --name DS-101-Final python=3.12.8 -y
+conda create -f environment.yml --name DS-101-Final
 conda activate DS-101-Final
 ```
 
 _Note:_ PowerShell might encounter issues with conda activation. Using `cmd.exe` is often more reliable.
 
-#### 2. Install Dependencies (if didn't use -f environment.yml)
-
-**Option 1: Using `conda` (Slower)**
-
-```
-conda install -n DS-101-Final -c conda-forge --file requirements.txt -y
-```
-
-**Option 2: Using `mamba` (Faster - Recommended)**
-
-```
-conda install -c conda-forge mamba -y
-mamba install --file Notebooks/requirements.txt -y
-```
-
-#### 3. Configure Git for Notebook Cleaning
+#### 2. Configure Git for Notebook Cleaning
 
 Automatically clean Jupyter Notebooks (remove outputs and metadata) before committing, you need to configure Git attributes and the `nb-clean` filter.
 
-**3.1 Find your Conda Installation Path:**
+**2.1 Find your Conda Installation Path:**
 
 ```
 where conda # Windows
 which conda # macOS/Linux
 ```
 
-**3.2 Add the BERTopic Scripts Path to Environment Variables:**
+**2.2 Add the DS-101-Final Scripts Path to Environment Variables:**
 
 Add the path to the `nb-clean` executable (located within your `BERTopic` environment's `Scripts` or `bin` directory) to your system's PATH environment variable. The typical path is:
 
-- **Windows:** `conda_path\envs\BERTopic\Scripts` (e.g., `C:\Users\YourUser\anaconda3\envs\BERTopic\Scripts`)
-- **macOS/Linux:** `conda_path/envs/BERTopic/bin` (e.g., `/Users/youruser/anaconda3/envs/BERTopic/bin`)
+- **Windows:** `conda_path\envs\DS-101-Final\Scripts` (e.g., `C:\Users\YourUser\anaconda3\envs\DS-101-Final\Scripts`)
+- **macOS/Linux:** `conda_path/envs/DS-101-Final/bin` (e.g., `/Users/youruser/anaconda3/envs/DS-101-Final/bin`)
 
-**3.3 Restart your computer:**
+**2.3 Restart your computer:**
 
 For the PATH changes to take effect, you _must_ restart your terminal or IDE.
 
-**3.4 Configure the Git Filter:**
+**2.4 Configure the Git Filter:**
 
 ```
 git config --global filter.nb-clean.clean "nb-clean clean"
