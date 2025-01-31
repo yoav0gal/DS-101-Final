@@ -7,10 +7,11 @@ ERROR_LOG="setup_error.log"
 trap 'echo "❌ Error on line $LINENO: $BASH_COMMAND" | tee -a "$ERROR_LOG"; exit 1' ERR
 
 # Default values (can be overridden)
-ENV_NAME="Houri"  # Change this to your desired Conda environment name
-PYTHON_VERSION="3.12.2"  # Default Python version
-REQUIREMENTS_FILE="$(pwd)/requirements.txt"  # Absolute path to avoid issues
-CUSTOM_CHANNELS=("conda-forge")  # Add custom Conda channels here
+ENV_NAME="DS-101-Final" 
+PYTHON_VERSION="3.12.2" 
+REQUIREMENTS_FILE="$(pwd)/requirements.txt" 
+CUSTOM_CHANNELS=("conda-forge") 
+SETUP_AUTO_UPDATER="./set_up_auto_updater.sh" 
 
 # Allow user to override Python version via command-line argument
 if [ -n "$1" ]; then
@@ -116,6 +117,51 @@ else
 fi
 
 # -----------------------------
+# Auto-Update Conda Wrapper
+# -----------------------------
+
+echo "🔄 Setting up Conda auto-update script..."
+
+CONDA_WRAPPER="$PWD/conda_auto_update.sh"
+
+cat <<EOL > "$CONDA_WRAPPER"
+#!/bin/bash
+ERROR_LOG="$ERROR_LOG"
+REQUIREMENTS_FILE="$REQUIREMENTS_FILE"
+conda install "\$@" -y 2>&1 | tee -a "\$ERROR_LOG"
+conda list --export | grep -v "^#" > "\$REQUIREMENTS_FILE"
+echo "✅ Updated \$REQUIREMENTS_FILE after installing: \$@"
+EOL
+
+chmod +x "$CONDA_WRAPPER"
+
+# Add alias for auto-update
+echo "alias conda-install='$CONDA_WRAPPER'" >> "$HOME/.bashrc"
+echo "alias conda-install='$CONDA_WRAPPER'" >> "$HOME/.zshrc"
+
+# Apply alias immediately
+if [ -n "$BASH_VERSION" ]; then
+    source "$HOME/.bashrc"
+elif [ -n "$ZSH_VERSION" ]; then
+    source "$HOME/.zshrc"
+fi
+
+echo "✅ Auto-update for $REQUIREMENTS_FILE is now enabled!"
+
+# -----------------------------
+# Set File Permissions (Linux/macOS/Windows)
+# -----------------------------
+
+echo "🔒 Adjusting permissions for $REQUIREMENTS_FILE..."
+
+chmod 666 "$REQUIREMENTS_FILE"  # Read/write for all users
+
+# If running on Windows (Git Bash or WSL), use PowerShell for permissions
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    powershell.exe -Command "icacls \"$(cygpath -w "$REQUIREMENTS_FILE")\" /grant Everyone:F"
+fi
+
+# -----------------------------
 # Jupyter Notebook Kernel Setup
 # -----------------------------
 
@@ -134,11 +180,21 @@ python -m ipykernel install --user --name "$ENV_NAME" --display-name "Python ($E
 echo "✅ Jupyter kernel for '$ENV_NAME' is set up!"
 
 # -----------------------------
-# Final Verification
+# Auto-Update Mechanism
 # -----------------------------
 
-echo "🔍 Checking active Conda environment..."
-conda info --envs | grep '*'
+echo "🔄 Setting up auto-update mechanism using $SETUP_AUTO_UPDATER..."
+if [ -x "$SETUP_AUTO_UPDATER" ]; then
+    bash "$SETUP_AUTO_UPDATER" || {
+        echo "❌ Failed to execute $SETUP_AUTO_UPDATER. Please check the script and try again." | tee -a "$ERROR_LOG"
+        exit 1
+    }
+else
+    echo "❌ $SETUP_AUTO_UPDATER is missing or not executable. Please ensure it exists and is properly set up." | tee -a "$ERROR_LOG"
+    exit 1
+fi
+echo "✅ Auto-update mechanism is now active!"
+
 
 echo "🎉 Setup complete! You can now start working on your project."
 echo "🚀 To activate the Conda environment, run: conda activate $ENV_NAME"
