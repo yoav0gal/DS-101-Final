@@ -4,16 +4,24 @@ The final project in DS course
 
 ### Setting up an Environment and Git for Clean Notebooks
 
-Steps to create a conda environment for BERTopic and configure Git to automatically clean Jupyter Notebooks (`.ipynb`) before committing.
+Steps to create a conda environment for project and configure Git to automatically clean Jupyter Notebooks (`.ipynb`) before committing.
 
 #### 1. Create and Activate Conda Environment
 
+###### 1.1 Option 1 using conda
+
 ```bash
-conda create -f env.yml --name DS-101-Final
+conda create -f env.yml -n DS-101-Final -y
 conda activate DS-101-Final
 ```
 
 _Note:_ PowerShell might encounter issues with conda activation. Using `cmd.exe` is often more reliable.
+
+###### 1.2 Option 2 using mamba
+
+conda create-n DS-101-Final python=3.12.8 -y
+conda install -c conda-forge mamba -y
+mamba install -f requirements.txt -y
 
 #### 2. Configure Git for Notebook Cleaning
 
