@@ -9,7 +9,7 @@ Steps to create a conda environment for BERTopic and configure Git to automatica
 #### 1. Create and Activate Conda Environment
 
 ```bash
-conda create -f environment.yml --name DS-101-Final
+conda create -f env.yml --name DS-101-Final
 conda activate DS-101-Final
 ```
 
