@@ -19,7 +19,7 @@ _Note:_ PowerShell might encounter issues with conda activation. Using `cmd.exe`
 
 ###### 1.2 Option 2 using mamba
 
-conda create-n DS-101-Final python=3.12.8 -y
+conda create -n DS-101-Final python=3.12.8 -y
 conda install -c conda-forge mamba -y
 mamba install -f requirements.txt -y
 
@@ -36,7 +36,7 @@ which conda # macOS/Linux
 
 **2.2 Add the DS-101-Final Scripts Path to Environment Variables:**
 
-Add the path to the `nb-clean` executable (located within your `BERTopic` environment's `Scripts` or `bin` directory) to your system's PATH environment variable. The typical path is:
+Add the path to the `nb-clean` executable (located within your `DS-101-Final` environment's `Scripts` or `bin` directory) to your system's PATH environment variable. The typical path is:
 
 - **Windows:** `conda_path\envs\DS-101-Final\Scripts` (e.g., `C:\Users\YourUser\anaconda3\envs\DS-101-Final\Scripts`)
 - **macOS/Linux:** `conda_path/envs/DS-101-Final/bin` (e.g., `/Users/youruser/anaconda3/envs/DS-101-Final/bin`)
