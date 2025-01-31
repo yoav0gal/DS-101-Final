@@ -19,7 +19,7 @@ _Note:_ PowerShell might encounter issues with conda activation. Using `cmd.exe`
 
 ###### 1.2 Option 2 using mamba
 
-conda create-n DS-101-Final python=3.12.8 -y
+conda create -n DS-101-Final python=3.12.8 -y
 conda install -c conda-forge mamba -y
 mamba install -f requirements.txt -y
 
