@@ -116,37 +116,6 @@ else
     touch "$REQUIREMENTS_FILE"
 fi
 
-# -----------------------------
-# Auto-Update Conda Wrapper
-# -----------------------------
-
-echo "🔄 Setting up Conda auto-update script..."
-
-CONDA_WRAPPER="$PWD/conda_auto_update.sh"
-
-cat <<EOL > "$CONDA_WRAPPER"
-#!/bin/bash
-ERROR_LOG="$ERROR_LOG"
-REQUIREMENTS_FILE="$REQUIREMENTS_FILE"
-conda install "\$@" -y 2>&1 | tee -a "\$ERROR_LOG"
-conda list --export | grep -v "^#" > "\$REQUIREMENTS_FILE"
-echo "✅ Updated \$REQUIREMENTS_FILE after installing: \$@"
-EOL
-
-chmod +x "$CONDA_WRAPPER"
-
-# Add alias for auto-update
-echo "alias conda-install='$CONDA_WRAPPER'" >> "$HOME/.bashrc"
-echo "alias conda-install='$CONDA_WRAPPER'" >> "$HOME/.zshrc"
-
-# Apply alias immediately
-if [ -n "$BASH_VERSION" ]; then
-    source "$HOME/.bashrc"
-elif [ -n "$ZSH_VERSION" ]; then
-    source "$HOME/.zshrc"
-fi
-
-echo "✅ Auto-update for $REQUIREMENTS_FILE is now enabled!"
 
 # -----------------------------
 # Set File Permissions (Linux/macOS/Windows)
@@ -178,22 +147,6 @@ echo "🔄 Adding '$ENV_NAME' as a Jupyter kernel..."
 python -m ipykernel install --user --name "$ENV_NAME" --display-name "Python ($ENV_NAME)" 2>&1 | tee -a "$ERROR_LOG"
 
 echo "✅ Jupyter kernel for '$ENV_NAME' is set up!"
-
-# -----------------------------
-# Auto-Update Mechanism
-# -----------------------------
-
-echo "🔄 Setting up auto-update mechanism using $SETUP_AUTO_UPDATER..."
-if [ -x "$SETUP_AUTO_UPDATER" ]; then
-    bash "$SETUP_AUTO_UPDATER" || {
-        echo "❌ Failed to execute $SETUP_AUTO_UPDATER. Please check the script and try again." | tee -a "$ERROR_LOG"
-        exit 1
-    }
-else
-    echo "❌ $SETUP_AUTO_UPDATER is missing or not executable. Please ensure it exists and is properly set up." | tee -a "$ERROR_LOG"
-    exit 1
-fi
-echo "✅ Auto-update mechanism is now active!"
 
 
 echo "🎉 Setup complete! You can now start working on your project."
