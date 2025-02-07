@@ -35,8 +35,8 @@ if ! command -v jq &> /dev/null; then
 
     elif [[ "$OS" == "Windows_NT" ]]; then
         echo "🪟 Detected Windows. Installing jq..."
-        curl -L -k -o jq.exe https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
-        mv jq.exe C:\\Users\\Ilai\\Desktop\\projects\\DS-101-Final || mv jq.exe /c/Windows/system32/jq.exe
+        curl -L -o jq.exe https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
+        mv jq.exe /usr/local/bin/jq || mv jq.exe /c/Windows/system32/jq.exe
 
     else
         echo "❌ Unsupported OS. Please install jq manually."
