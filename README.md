@@ -26,7 +26,7 @@ Steps to create a conda environment for project and configure Git to automatical
 ###### 1.1 Option 1 using conda
 
 ```bash
-conda create -f env.yml -n DS-101-Final -y
+conda env create -f env.yml -y
 conda activate DS-101-Final
 ```
 
