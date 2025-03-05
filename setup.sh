@@ -7,10 +7,11 @@ ERROR_LOG="setup_error.log"
 trap 'echo "❌ Error on line $LINENO: $BASH_COMMAND" | tee -a "$ERROR_LOG"; exit 1' ERR
 
 # Default values (can be overridden)
-ENV_NAME="Houri"  # Change this to your desired Conda environment name
-PYTHON_VERSION="3.12.2"  # Default Python version
-REQUIREMENTS_FILE="$(pwd)/requirements.txt"  # Absolute path to avoid issues
-CUSTOM_CHANNELS=("conda-forge")  # Add custom Conda channels here
+ENV_NAME="DS-101-Final" 
+PYTHON_VERSION="3.12.2" 
+REQUIREMENTS_FILE="$(pwd)/requirements.txt" 
+CUSTOM_CHANNELS=("conda-forge") 
+SETUP_AUTO_UPDATER="./set_up_auto_updater.sh" 
 
 # Allow user to override Python version via command-line argument
 if [ -n "$1" ]; then
@@ -115,6 +116,20 @@ else
     touch "$REQUIREMENTS_FILE"
 fi
 
+
+# -----------------------------
+# Set File Permissions (Linux/macOS/Windows)
+# -----------------------------
+
+echo "🔒 Adjusting permissions for $REQUIREMENTS_FILE..."
+
+chmod 666 "$REQUIREMENTS_FILE"  # Read/write for all users
+
+# If running on Windows (Git Bash or WSL), use PowerShell for permissions
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    powershell.exe -Command "icacls \"$(cygpath -w "$REQUIREMENTS_FILE")\" /grant Everyone:F"
+fi
+
 # -----------------------------
 # Jupyter Notebook Kernel Setup
 # -----------------------------
@@ -133,12 +148,6 @@ python -m ipykernel install --user --name "$ENV_NAME" --display-name "Python ($E
 
 echo "✅ Jupyter kernel for '$ENV_NAME' is set up!"
 
-# -----------------------------
-# Final Verification
-# -----------------------------
-
-echo "🔍 Checking active Conda environment..."
-conda info --envs | grep '*'
 
 echo "🎉 Setup complete! You can now start working on your project."
 echo "🚀 To activate the Conda environment, run: conda activate $ENV_NAME"

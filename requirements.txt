@@ -7,3 +7,5 @@ ipykernel
 nb-clean
 xgboost
 ipython-autotime
+requests
+beautifulsoup4

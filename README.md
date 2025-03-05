@@ -2,6 +2,21 @@
 
 The final project in DS course
 
+
+# WIP - auto enviorment setup
+
+```bash
+bash setup.sh 
+conda activate DS-101-Final 
+```
+
+By now you should be able to install and uninstall (with install/uninstall commands) packages using `pip` or `conda` and that will auto update the requirements.txt file.
+
+- All libs should be installed.
+- Notebooks should auto clean on commit (for others)
+
+____
+
 ### Setting up an Environment and Git for Clean Notebooks
 
 Steps to create a conda environment for project and configure Git to automatically clean Jupyter Notebooks (`.ipynb`) before committing.
@@ -11,7 +26,7 @@ Steps to create a conda environment for project and configure Git to automatical
 ###### 1.1 Option 1 using conda
 
 ```bash
-conda create -f env.yml -n DS-101-Final -y
+conda env create -f env.yml -y
 conda activate DS-101-Final
 ```
 
@@ -19,7 +34,7 @@ _Note:_ PowerShell might encounter issues with conda activation. Using `cmd.exe`
 
 ###### 1.2 Option 2 using mamba
 
-conda create -n DS-101-Final python=3.12.8 -y
+conda create-n DS-101-Final python=3.12.8 -y
 conda install -c conda-forge mamba -y
 mamba install -f requirements.txt -y
 
