@@ -9,3 +9,8 @@ xgboost
 ipython-autotime
 requests
 beautifulsoup4
+plotly
+tqdm
+bayesian-optimization
+holidays
+pyspark plotly
