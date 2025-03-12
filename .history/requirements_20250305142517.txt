@@ -13,5 +13,4 @@ plotly
 tqdm
 bayesian-optimization
 holidays
-pyspark
-imbalanced-learn
+pyspark plotly

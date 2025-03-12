@@ -14,4 +14,3 @@ tqdm
 bayesian-optimization
 holidays
 pyspark
-imbalanced-learn
