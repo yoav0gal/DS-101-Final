@@ -2,7 +2,6 @@
 
 The final project in DS course
 
-
 # WIP - auto enviorment setup
 
 ```bash
@@ -15,7 +14,7 @@ By now you should be able to install and uninstall (with install/uninstall comma
 - All libs should be installed.
 - Notebooks should auto clean on commit (for others)
 
-____
+---
 
 ### Setting up an Environment and Git for Clean Notebooks
 
@@ -63,7 +62,7 @@ For the PATH changes to take effect, you _must_ restart your terminal or IDE.
 **2.4 Configure the Git Filter:**
 
 ```
-git config --global filter.nb-clean.clean "nb-clean clean"
+git config --global filter.nb-clean.clean "nb-clean clean --preserve-cell-outputs"
 git config --global filter.nb-clean.smudge "cat"
 ```
 
