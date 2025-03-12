@@ -1,0 +1,16 @@
+numpy
+pandas
+scikit-learn
+matplotlib=3.10.0
+seaborn=0.13.2
+ipykernel
+nb-clean
+xgboost
+ipython-autotime
+requests
+beautifulsoup4
+plotly
+tqdm
+bayesian-optimization
+holidays
+pyspark
