@@ -1,3 +1,2 @@
 *.ipynb filter=nb-clean
 **/*.ipynb filter=nb-clean
-*.ipynb filter=remove-notebook-output
