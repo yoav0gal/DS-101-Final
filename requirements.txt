@@ -16,3 +16,4 @@ holidays
 pyspark
 imbalanced-learn
 torch
+thefuzz
